@@ -1,0 +1,367 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&display=swap');
+
+:root{
+  --bg:#000000;
+  --text:#ffffff;
+  --accent:#8B0000;
+  --timer-accent:#0B6623;
+  --text-secondary:#b5b5b5;
+  --max-width:480px;
+  --header-height:64px;
+  --footer-height:64px;
+  --sharp:0px;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Orbitron',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+*{box-sizing:border-box}
+
+.app{
+  max-width:var(--max-width);
+  margin:0 auto;
+  min-height:100vh;
+  padding-bottom:var(--footer-height);
+  position:relative;
+}
+
+/* ================= HEADER ================= */
+
+header.app-header{
+  position:sticky;
+  top:0;
+  height:var(--header-height);
+  display:flex;
+  align-items:center;
+  justify-content:space-between; /* ### CHANGED */
+  padding:0 14px;               /* ### ADDED */
+  background:#0a0a0a;
+  border-bottom:2px solid var(--accent);
+  z-index:50;
+}
+
+/* ### ADDED: LEFT BRAND */
+.header-left{
+  font-weight:900;
+  letter-spacing:2px;
+  font-size:1rem;
+  color:var(--accent);
+  white-space:nowrap;
+}
+.header-left span{
+  color:var(--text);
+}
+
+/* CENTER TITLE */
+header .title{
+  display:flex;                 /* ### CHANGED */
+  flex-direction:column;        /* ### CHANGED */
+  align-items:center;           /* ### CHANGED */
+  text-align:center;
+  width:auto;                   /* ### CHANGED */
+  line-height:1.1;              /* ### ADDED */
+  font-size:1.2rem;
+  font-weight:800;
+}
+
+/* ### ADDED: DATE + TIME TUNING */
+#headerDate{
+  font-size:0.75rem;
+  opacity:0.75;
+  letter-spacing:1px;
+}
+#headerTime{
+  font-size:1.15rem;
+  font-weight:800;
+}
+
+/* RIGHT MENU */
+.header-right{
+  position:static;              /* ### CHANGED */
+}
+
+.header-right button{
+  background:transparent;
+  border:none;
+  color:var(--text);            /* ### CHANGED */
+  cursor:pointer;
+  font-size:1.4rem;             /* ### ADDED */
+}
+
+/* ================= MAIN ================= */
+
+main{padding:12px;}
+
+.main-clock{
+  text-align:center;
+  font-size:3rem;
+  font-weight:800;
+  margin-top:1.5rem;
+}
+
+.subdate{
+  text-align:center;
+  font-size:0.95rem;
+  opacity:0.85;
+  margin-top:6px;
+}
+
+.list{margin-top:18px;}
+
+.card{
+  background:#070707;
+  border:1px solid #111;
+  padding:12px;
+  margin-bottom:12px;
+  border-radius:var(--sharp);
+}
+
+.list-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid #111;
+}
+.list-item:last-child{border-bottom:none}
+
+/* ================= FOOTER ================= */
+
+footer.app-footer{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:var(--max-width);
+  height:var(--footer-height);
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  background:#0a0a0a;
+  border-top:2px solid var(--accent);
+  z-index:60;
+}
+
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  color:var(--text-secondary);
+  text-decoration:none;
+  font-size:12px;
+}
+
+.nav-item i{
+  font-size:20px;
+  margin-bottom:4px;
+  color:currentColor;
+}
+.nav-item span{
+  font-size:10px;
+  letter-spacing:1px;
+}
+
+
+.nav-item svg{
+  width:22px;
+  height:22px;
+  fill:var(--text-secondary);
+  stroke:none;
+}
+
+.nav-item.active svg{fill:var(--accent)}
+
+/* ================= PROFILE PANEL ================= */
+
+.profile-panel{
+  position:fixed;
+  right:0;
+  top:var(--header-height);
+  width:320px;
+  max-width:90%;
+  height:calc(100vh - var(--header-height) - var(--footer-height));
+  background:#070707;
+  border-left:2px solid var(--accent);
+  padding:12px;
+  box-sizing:border-box;
+  z-index:70;
+  transform:translateX(0);
+}
+
+.profile-row{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+input,select,textarea{
+  background:#0a0a0a;
+  color:var(--text);
+  border:1px solid #222;
+  padding:8px;
+  width:100%;
+  box-sizing:border-box;
+}
+
+button.btn{
+  background:transparent;
+  color:var(--accent);
+  border:2px solid var(--accent);
+  padding:8px 12px;
+  cursor:pointer;
+}
+
+/* ================= PASSCODE ================= */
+
+.passcode-screen{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(180deg,#000000,#050505);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  z-index:200;
+}
+
+.passcode-circles{
+  display:flex;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.circle{
+  width:18px;
+  height:18px;
+  border:2px solid var(--text);
+  border-radius:var(--sharp);
+}
+
+.circle.filled{background:var(--text)}
+
+.keypad{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  width:100%;
+  max-width:320px;
+  margin-top:12px;
+}
+
+.key{
+  background:transparent;
+  color:var(--text);
+  border:2px solid #222;
+  padding:14px 0;
+  text-align:center;
+  font-size:1.2rem;
+  border-radius:var(--sharp);
+  cursor:pointer;
+}
+
+.key.wide{grid-column:span:2}
+
+/* ===== TIMER PAGE ===== */
+
+.page-title{
+  text-align:center;
+  font-size:0.75rem;
+  letter-spacing:2px;
+  color:var(--text-muted);
+  margin:14px 0 20px;
+}
+
+/* CARD */
+.timer-card{
+  background:radial-gradient(circle at top, #101010, #050505);
+  border:1px solid #1a1a1a;
+  padding:26px 20px 28px;
+}
+
+/* TIMER DIGITS */
+.timer-display{
+  font-size:4.4rem;
+  font-weight:900;
+  letter-spacing:4px;
+  color:#cfcfcf;
+  text-align:center;
+  margin:22px 0 26px;
+  text-shadow:
+    0 0 14px rgba(255,255,255,0.08),
+    0 0 40px rgba(255,255,255,0.04);
+}
+
+/* +/- CONTROLS */
+.timer-adjust{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  margin-bottom:24px;
+}
+
+.btn-square{
+  width:56px;
+  height:56px;
+  background:#0b0b0b;
+  border:1px solid #1e1e1e;
+  color:var(--text-secondary);
+  font-size:1.6rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+/* ACTION BUTTONS */
+.timer-actions{
+  display:flex;
+  gap:14px;
+}
+
+.btn-wide{
+  flex:1;
+  padding:16px 0;
+  font-size:1.2rem;
+  cursor:pointer;
+}
+
+/* RESET */
+.btn-reset{
+  background:#0b0b0b;
+  border:1px solid #1e1e1e;
+  color:var(--text-muted);
+}
+
+/* START */
+.btn-start{
+  background:linear-gradient(180deg,#a00000,#6f0000);
+  border:none;
+  color:#fff;
+  font-weight:800;
+  letter-spacing:2px;
+  box-shadow:0 0 22px rgba(139,0,0,0.45);
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(min-width:600px){
+  .main-clock{font-size:4rem}
+}
+
+/* ================= HELPERS ================= */
+
+.muted{
+  opacity:0.75;
+  font-size:0.95rem;
+}
+
+.hidden{display:none}

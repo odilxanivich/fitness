@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <title>Fitness App Preview</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <!-- Passcode screen (shown on load until unlocked) -->
+    <div id="passcode" class="passcode-screen" aria-label="Passcode screen">
+      <div style="text-align:center;margin-bottom:8px">
+        <h2 style="margin:0;color:var(--text)">Enter Passcode</h2>
+        <div class="muted" id="pass-msg">Setup or enter 4-digit passcode</div>
+      </div>
+      <div class="passcode-circles" id="circles" aria-hidden></div>
+      <div style="width:100%;max-width:320px;margin-top:8px;display:flex;justify-content:space-between">
+        <div style="width:48%"><div class="muted">New</div><div id="new-mask" style="padding:8px;border:1px solid #222;background:#0a0a0a;color:var(--text)"></div></div>
+        <div style="width:48%"><div class="muted">Confirm</div><div id="confirm-mask" style="padding:8px;border:1px solid #222;background:#0a0a0a;color:var(--text)"></div></div>
+      </div>
+      <div id="pass-error" style="color:var(--accent);min-height:20px;margin-top:8px"></div>
+      <div class="keypad" role="group" aria-label="Keypad">
+        <button class="key">1</button><button class="key">2</button><button class="key">3</button>
+        <button class="key">4</button><button class="key">5</button><button class="key">6</button>
+        <button class="key">7</button><button class="key">8</button><button class="key">9</button>
+        <button class="key">⌫</button><button class="key">0</button><button class="key" id="ok">OK</button>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="app-header" role="banner">
+
+  <!-- LEFT: BRAND -->
+  <div class="header-left" id="headerBrand">
+    CYBER<span>FIT</span>
+  </div>
+
+  <!-- CENTER: DATE + TIME (JS USES THESE IDS) -->
+  <div class="title" id="headerTitle" aria-live="polite">
+    <div id="headerDate"></div>
+    <div id="headerTime"></div>
+  </div>
+
+  <!-- RIGHT: MENU / PROFILE -->
+  <div class="header-right">
+    <button id="profileBtn" aria-label="Profile">
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
+    <circle cx="12" cy="8" r="4"></circle>
+    <path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path>
+  </svg>
+</button>
+
+  </div>
+
+</header>
+
+
+    <!-- Inline profile panel (no modal) -->
+    <aside id="profilePanel" class="profile-panel hidden" aria-label="Profile panel">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 style="margin:0">Profile</h3>
+        <button id="closeProfile" class="btn">Close</button>
+      </div>
+      <div style="margin-top:12px">
+        <div class="profile-row"><label style="width:80px">Name</label><input id="pName" /></div>
+        <div class="profile-row"><label style="width:80px">Weight</label><input id="pWeight" type="number" /></div>
+        <div class="profile-row"><label style="width:80px">Height</label><input id="pHeight" type="number" /></div>
+        <div class="profile-row"><label style="width:80px">Motto</label><input id="pMotto" /></div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button id="saveProfile" class="btn">Save</button>
+          <button id="resetData" class="btn" style="border-color:#333;color:#fff">Reset</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content (SPA) -->
+    <main id="main" role="main">
+      <section id="home" class="page">
+        <div class="main-clock" id="bigTime">00:00</div>
+        <div class="subdate" id="bigDate">—</div>
+
+        <div class="list">
+          <div class="card">
+            <h3 style="margin:0 0 8px 0">Weekly Schedule</h3>
+            <div class="list-item"><div>Mon</div><div>Hand day</div></div>
+            <div class="list-item"><div>Tue</div><div>Biceps</div></div>
+            <div class="list-item"><div>Wed</div><div>Triceps</div></div>
+            <div class="list-item"><div>Thu</div><div>Leg day</div></div>
+            <div class="list-item"><div>Fri</div><div>Shoulder day</div></div>
+          </div>
+
+          <div class="card">
+            
+          </div>
+        </div>
+      </section>
+
+      <section id="exercises" class="page hidden">
+        <h2>Exercises</h2>
+        <div class="card">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="width:64px;height:64px;background:#111;display:flex;align-items:center;justify-content:center">GIF</div>
+            <div>
+              <div style="font-weight:700">Cable Arm Pulldown</div>
+              <div class="muted">Tap to toggle video</div>
+            </div>
+            <button class="btn" data-toggle="ex1">▶</button>
+          </div>
+          <div id="ex1" class="hidden" style="margin-top:8px">
+            <video width="100%" muted controls src=""></video>
+            <div style="margin-top:8px">How to: Stand shoulder width, pull down...</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="workouts" class="page hidden">
+        <h2>Workouts</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-weight:700">Day 1 | Bicep Day</div>
+              <button class="btn" data-open="d1">+</button>
+            </div>
+            <div id="d1" class="hidden" style="margin-top:8px">
+              <div class="list-item"><div>Cable curl</div><div>10x3</div></div>
+              <div class="list-item"><div>Cable Rope pushdown</div><div>10x3</div></div>
+            </div>
+          </div>
+          <div class="card"><div style="font-weight:700">Day 2</div></div>
+          <div class="card"><div style="font-weight:700">Day 3</div></div>
+          <div class="card"><div style="font-weight:700">Day 4</div></div>
+          <div class="card"><div style="font-weight:700">Day 5</div></div>
+        </div>
+      </section>
+
+      <section id="bodycheck" class="page hidden">
+        <h2>Body Check</h2>
+        <div class="card">
+          <div style="display:flex;gap:8px">
+            <input id="bcDate" type="date" style="flex:1" />
+            <input id="bcWeight" type="number" placeholder="kg" style="width:80px" />
+            <button id="addBc" class="btn">Add</button>
+          </div>
+          <div id="bcList" style="margin-top:12px"></div>
+          <div style="margin-top:12px"><canvas id="bcChart" width="360" height="120" style="width:100%;background:#070707"></canvas></div>
+        </div>
+      </section>
+
+      <section id="timers" class="page hidden">
+  <h2 class="page-title">Timer</h2>
+
+  <div class="card timer-card">
+
+    <div class="timer-display" id="timerDisplay">01:00</div>
+
+    <div class="timer-adjust">
+      <button class="btn-square" id="sub30">−</button>
+      <button class="btn-square" id="add30">+</button>
+    </div>
+
+    <div class="timer-actions">
+      <button class="btn-wide btn-reset" id="resetTimer">⟳</button>
+      <button class="btn-wide btn-start" id="startPause">▶</button>
+    </div>
+
+  </div>
+</section>
+
+    </main>
+
+    <!-- Footer nav -->
+    <footer class="app-footer" role="navigation" aria-label="Main navigation">
+
+  
+
+  <a class="nav-item" data-route="/exercises">
+    <i class="fa-solid fa-dumbbell"></i>
+    <span>EXERCISES</span>
+  </a>
+
+  <a class="nav-item" data-route="/workouts">
+    <i class="fa-solid fa-gear"></i>
+    <span>WORKOUTS</span>
+  </a>
+
+  <a class="nav-item active" data-route="/">
+    <i class="fa-solid fa-house"></i>
+    <span>HOME</span>
+  </a>
+
+  <a class="nav-item" data-route="/bodycheck">
+    <i class="fa-solid fa-scale-balanced"></i>
+    <span>BODY CHECK</span>
+  </a>
+
+  <a class="nav-item" data-route="/timers">
+    <i class="fa-regular fa-clock"></i>
+    <span>TIME</span>
+  </a>
+
+  
+
+</footer>
+
+
+
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>
