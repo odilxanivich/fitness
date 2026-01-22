@@ -1,22 +1,42 @@
 (function(){
-  // Storage helpers - using in-memory storage instead of localStorage
-  let appData = {
-    session: {lastRoute:'/', scrollPositions:{}, profilePanelOpen:false},
-    profile: {name:'Salmonxon', weightKg:70, heightCm:175, motto:'Train like a beast'},
-    bodyCheck: [],
-    passcode: null,
-    settings: {timerDefaultSeconds:60, use24Hour:true}
+  // Storage helpers - using localStorage for persistence
+  const save = (k, v) => {
+    try {
+      localStorage.setItem(k, JSON.stringify(v));
+    } catch(e) {
+      console.error('Storage error:', e);
+    }
+  };
+  
+  const load = (k, def) => {
+    try {
+      const v = localStorage.getItem(k);
+      return v ? JSON.parse(v) : def;
+    } catch(e) {
+      return def;
+    }
   };
 
-  const save = (k, v) => { appData[k] = v; };
-  const load = (k, def) => { return appData[k] !== undefined ? appData[k] : def; };
+  // Prevent accidental back navigation
+  history.pushState(null, '', location.href);
+  window.addEventListener('popstate', function() {
+    history.pushState(null, '', location.href);
+  });
 
   // Session keys
-  const SESSION_KEY = 'session';
-  const PROFILE_KEY = 'profile';
-  const BODY_KEY = 'bodyCheck';
-  const PASS_KEY = 'passcode';
-  const SETTINGS_KEY = 'settings';
+  const SESSION_KEY = 'cyberfit:session';
+  const PROFILE_KEY = 'cyberfit:profile';
+  const BODY_KEY = 'cyberfit:bodyCheck';
+  const PASS_KEY = 'cyberfit:passcode';
+  const SETTINGS_KEY = 'cyberfit:settings';
+
+  // Initialize default data if not exists
+  if(!load(PROFILE_KEY)) {
+    save(PROFILE_KEY, {name:'Salmonxon', weightKg:70, heightCm:175, motto:'Train like a beast'});
+  }
+  if(!load(SETTINGS_KEY)) {
+    save(SETTINGS_KEY, {timerDefaultSeconds:60, use24Hour:true});
+  }
 
   // Passcode logic
   const passEl = document.getElementById('passcode');
@@ -200,13 +220,7 @@
   });
   resetData.addEventListener('click', () => { 
     if(confirm('Reset all app data?')){ 
-      appData = {
-        session: {lastRoute:'/', scrollPositions:{}, profilePanelOpen:false},
-        profile: {name:'Salmonxon', weightKg:70, heightCm:175, motto:'Train like a beast'},
-        bodyCheck: [],
-        passcode: null,
-        settings: {timerDefaultSeconds:60, use24Hour:true}
-      };
+      localStorage.clear();
       location.reload(); 
     } 
   });

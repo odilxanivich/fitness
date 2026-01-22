@@ -16,35 +16,35 @@
     
     <!-- Passcode Screen -->
     <div id="passcode" class="fixed inset-0 bg-gradient-to-b from-black to-zinc-950 flex flex-col items-center justify-center px-4 z-[200]">
-      <div class="text-center mb-2">
-        <h2 class="text-xl font-bold text-white m-0">Enter Passcode</h2>
-        <div class="text-neutral-400 text-sm" id="pass-msg">Setup or enter 4-digit passcode</div>
+      <div class="text-center mb-4">
+        <h2 class="text-lg font-bold text-white m-0 mb-2">Enter Passcode</h2>
+        <div class="text-neutral-400 text-xs" id="pass-msg">Setup or enter 4-digit passcode</div>
       </div>
-      <div class="flex gap-3 mb-2" id="circles"></div>
-      <div class="w-full max-w-[320px] mt-2 flex justify-between gap-2">
+      <div class="flex gap-3 mb-3" id="circles"></div>
+      <div class="w-full max-w-[280px] mt-2 flex justify-between gap-2">
         <div class="w-1/2">
-          <div class="text-neutral-400 text-xs mb-1">New</div>
-          <div id="new-mask" class="p-2 border border-zinc-800 bg-zinc-950 text-white text-sm"></div>
+          <div class="text-neutral-400 text-[10px] mb-1">New</div>
+          <div id="new-mask" class="p-2 border border-zinc-800 bg-zinc-950 text-white text-xs min-h-[32px]"></div>
         </div>
         <div class="w-1/2">
-          <div class="text-neutral-400 text-xs mb-1">Confirm</div>
-          <div id="confirm-mask" class="p-2 border border-zinc-800 bg-zinc-950 text-white text-sm"></div>
+          <div class="text-neutral-400 text-[10px] mb-1">Confirm</div>
+          <div id="confirm-mask" class="p-2 border border-zinc-800 bg-zinc-950 text-white text-xs min-h-[32px]"></div>
         </div>
       </div>
-      <div id="pass-error" class="text-red-800 min-h-[20px] mt-2 text-sm"></div>
-      <div class="grid grid-cols-3 gap-3 w-full max-w-[320px] mt-3">
-        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-lg active:bg-zinc-900">1</button>
-        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-lg active:bg-zinc-900">2</button>
-        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-lg active:bg-zinc-900">3</button>
-        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-lg active:bg-zinc-900">4</button>
-        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-lg active:bg-zinc-900">5</button>
-        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-lg active:bg-zinc-900">6</button>
-        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-lg active:bg-zinc-900">7</button>
-        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-lg active:bg-zinc-900">8</button>
-        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-lg active:bg-zinc-900">9</button>
-        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-lg active:bg-zinc-900">⌫</button>
-        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-lg active:bg-zinc-900">0</button>
-        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-lg active:bg-zinc-900" id="ok">OK</button>
+      <div id="pass-error" class="text-red-800 min-h-[16px] mt-2 text-xs text-center"></div>
+      <div class="grid grid-cols-3 gap-2 w-full max-w-[280px] mt-3">
+        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-base active:bg-zinc-900">1</button>
+        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-base active:bg-zinc-900">2</button>
+        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-base active:bg-zinc-900">3</button>
+        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-base active:bg-zinc-900">4</button>
+        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-base active:bg-zinc-900">5</button>
+        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-base active:bg-zinc-900">6</button>
+        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-base active:bg-zinc-900">7</button>
+        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-base active:bg-zinc-900">8</button>
+        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-base active:bg-zinc-900">9</button>
+        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-base active:bg-zinc-900">⌫</button>
+        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-base active:bg-zinc-900">0</button>
+        <button class="key bg-transparent text-white border-2 border-zinc-800 py-3 text-sm active:bg-zinc-900" id="ok">OK</button>
       </div>
     </div>
 
@@ -113,8 +113,8 @@
       
       <!-- HOME PAGE -->
       <section id="home" class="page">
-        <div class="text-center text-5xl font-extrabold mt-6" id="bigTime">00:00</div>
-        <div class="text-center text-sm opacity-85 mt-1" id="bigDate">—</div>
+        <div class="text-center text-4xl sm:text-5xl font-extrabold mt-6" id="bigTime">00:00</div>
+        <div class="text-center text-xs sm:text-sm opacity-85 mt-1" id="bigDate">—</div>
 
         <div class="mt-5">
           <div class="bg-zinc-950 border border-zinc-900 p-3 mb-3">
