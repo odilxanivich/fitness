@@ -393,7 +393,7 @@
       if(running) {
         running = false;
         clearInterval(interval);
-        startPause.textContent = '▶';
+        startPause.innerHTML = '<i class="fa-solid fa-play"></i>';
       }
     });
   });
@@ -412,7 +412,7 @@
   
   startPause.addEventListener('click', () => { 
     running = !running;
-    startPause.textContent = running ? '⏸' : '▶';
+    startPause.innerHTML = running ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play"></i>';
     vibrate();
     
     if(running){
@@ -422,7 +422,7 @@
         if(seconds === 0){
           clearInterval(interval);
           running = false;
-          startPause.textContent = '▶';
+          startPause.innerHTML = '<i class="fa-solid fa-play"></i>';
           // Timer finished - vibrate and beep
           vibrate([100, 50, 100, 50, 100]);
           playShortBeep();
@@ -437,7 +437,7 @@
     seconds = settings.timerDefaultSeconds;
     running = false;
     clearInterval(interval);
-    startPause.textContent = '▶';
+    startPause.innerHTML = '<i class="fa-solid fa-play"></i>';
     updateTimer();
     vibrate();
   });
